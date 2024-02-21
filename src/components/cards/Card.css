@@ -1,0 +1,10 @@
+.Ccard {
+    float: left !important;
+    color: #B0F2B4 !important;
+    font-size: x-large;
+    font-weight: bold;
+    border: 1px solid black !important;
+    border-radius: 12px !important;
+    width: 250px;
+    height: 300px !important;
+}
