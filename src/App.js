@@ -4,7 +4,7 @@ import Card from "./components/cards/Card";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const tokenKey = "f05a171b96fe20565353e0226ceba021";
+const tokenKey = process.env.REACT_APP_API_KEY;
 function App() {
   const [place, setPlace] = useState();
   const [weatherList, setWeatherList] = useState([]);
