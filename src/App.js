@@ -8,6 +8,8 @@ const tokenKey = process.env.REACT_APP_API_KEY;
 function App() {
   const [place, setPlace] = useState();
   const [weatherList, setWeatherList] = useState([]);
+  const [searchedPlaces, setSearchedPlaces] = useState([]);
+
   const handlePlaceChange = (place) => {
     setPlace(place);
   };
@@ -24,13 +26,16 @@ function App() {
       icon: response.data.weather[0].icon,
     };
     setWeatherList([...weatherList, newWeather]);
+    setSearchedPlaces([...searchedPlaces, place]);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (place) {
+        if (place && !searchedPlaces.includes(place)) {
           await getWeather();
+        } else if (searchedPlaces.includes(place)) {
+          alert("Bu şehir zaten aranmış. Lütfen farklı bir şehir deneyin.");
         }
       } catch (error) {
         if (error.response) {
@@ -50,6 +55,12 @@ function App() {
   }, [place]);
   return (
     <div>
+      <h1
+        className="text-center"
+        style={{ fontSize: "75px", fontWeight: "700" }}
+      >
+        Weather App
+      </h1>
       <div className="App container text-center">
         <div className="row p-3 justify-content-start">
           <div className="col">
@@ -58,7 +69,7 @@ function App() {
         </div>
       </div>
       <div className="App container justify-content-start ">
-        <div className="row p-3 justify-content-start sag">
+        <div className="row container p-3 justify-content-start sag">
           {weatherList.map((weather, index) => (
             <div className="col-3 p-5" key={index}>
               <Card
