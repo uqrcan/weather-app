@@ -10,6 +10,12 @@ const InputAndButton = ({ onCityChange }) => {
   const handleClick = () => {
     onCityChange(city);
   };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleClick();
+    }
+  };
   
 
   const renk ={
@@ -29,6 +35,7 @@ const InputAndButton = ({ onCityChange }) => {
           aria-describedby="button-addon2"
           value={city}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
         <button
           className="btn"
